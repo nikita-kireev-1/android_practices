@@ -10,6 +10,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.module2.ui.theme.Module2Theme
 
@@ -19,29 +21,53 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Module2Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                Scaffold() { innerPadding ->
+                    Screen(null, Modifier.padding(innerPadding))
                 }
             }
         }
     }
 }
 
+@Preview(
+    name = "portrait",
+    showSystemUi = true,
+    device = Devices.PHONE,
+    showBackground = true,
+)
+@Preview(
+    name = "landscape",
+    showSystemUi = true,
+    device = Devices.TABLET,
+    showBackground = true,
+)
+@Preview(
+    name = "round",
+    showSystemUi = true,
+    device = "spec:width=200dp,height=200dp,isRound=true",
+    showBackground = true,
+    backgroundColor = 0xFFFFFF00
+)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun ScreenPreview(){
+    Scaffold(
+        containerColor = Color.Transparent
+    ) { innerPadding ->
+        Screen("Nikita", Modifier.padding(innerPadding))
+    }
+}
+@Composable
+fun Screen(
+    name : String?,
+    modifier : Modifier,
+){
     Text(
-        text = "Hello $name!",
+        text =
+            if(name == null){
+                "Имя не задано"
+            }else{
+                "Здравствуйте $name"
+            },
         modifier = modifier
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Module2Theme {
-        Greeting("Android")
-    }
 }
