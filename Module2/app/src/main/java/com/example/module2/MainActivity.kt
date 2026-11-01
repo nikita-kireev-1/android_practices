@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Module2Theme {
                 Scaffold() { innerPadding ->
-                    Screen("Nikita", Modifier.padding(innerPadding))
+                    Screen(null, Modifier.padding(innerPadding))
                 }
             }
         }
