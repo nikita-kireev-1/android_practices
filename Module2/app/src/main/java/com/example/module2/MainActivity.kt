@@ -19,11 +19,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Module2Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                Scaffold() { innerPadding ->
+                    Screen("Nikita", Modifier.padding(innerPadding))
                 }
             }
         }
@@ -31,17 +28,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Screen(
+    name : String?,
+    modifier : Modifier,
+){
     Text(
-        text = "Hello $name!",
+        text =
+            if(name == null){
+                 "Имя не задано"
+            }else{
+                "Здравствуйте $name"
+            },
         modifier = modifier
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Module2Theme {
-        Greeting("Android")
-    }
 }
